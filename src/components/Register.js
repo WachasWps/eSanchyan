@@ -1,67 +1,124 @@
-/* eslint-disable no-undef */
-import React from 'react'; 
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import "./register.css"
+import React, { useState } from 'react'; 
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../firebase'; // Assuming you have a firebase.js file
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "./register.css";
+import { collection, addDoc } from 'firebase/firestore'; // Import collection and addDoc from Firebase Firestore
 
 function Register() {
-   
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Check if password and confirmation password match
+      if (password !== confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+  
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      // Add user details to Firestore collection
+      await addDoc(collection(db, "users"), {
+        name: name,
+        email: email,
+      });
+  
+      // Clear error state
+      setError(null);
+  
+      // Display success toast
+      toast.success("Registration successful!", {
+        position: 'top-center'
+      });
+  
+      // Navigate to login page
+      navigate('/');
+  
+    } catch (error) {
+      setError(error.message);
+    }
+
+    // Reset form fields
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
+
   return (
-   <>
-            <div
-              id="login"
-              class="register-component-container register-component-root-class-name1"
-            >
-              <span class="register-component-text"><span>REGISTER</span></span>
-              <div class="register-component-container1"></div>
-              <div class="register-component-container2"></div>
-              <div class="register-component-container3">
-                <span class="register-component-text1"><span>Name</span></span>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  autocomplete="email"
-                  class="register-component-textinput input"
-                />
-                <span class="register-component-text2">
-                  <span> Email Id</span>
-                </span>
-                <input
-                  type="text"
-                  placeholder="Email Id"
-                  autocomplete="email"
-                  class="register-component-textinput1 input"
-                />
-                <span class="register-component-text3"><span>Password</span></span>
-                <input
-                  type="Password"
-                  placeholder="password"
-                  autocomplete="email"
-                  class="register-component-textinput2 input"
-                />
-                <span class="register-component-text4">
-                  <span>Confirm Password</span>
-                </span>
-                <input
-                  type="Password"
-                  placeholder="Confirm Password"
-                  autocomplete="current-password"
-                  class="register-component-textinput3 input"
-                />
-              </div>
-              <div class="register-component-container4"></div>
-              <button type="button" class="register-component-button button">
-               <Link to="/login"><span>Register</span></Link> 
-              </button>
-              <span class="register-component-text5">
-               <Link to="/login"> <span>Already have an account ?</span></Link>
-              </span>
-            </div>
-
-
-           
-           </>
-      )
+    <>
+      <div
+        id="login"
+        className="register-component-container register-component-root-class-name1"
+      >
+        <span className="register-component-text"><span>REGISTER</span></span>
+        <div className="register-component-container1"></div>
+        <div className="register-component-container2"></div>
+        <div className="register-component-container3">
+          <span className="register-component-text1"><span>Name</span></span>
+          <input
+            type="text"
+            placeholder="Name"
+            autoComplete="name"
+            className="register-component-textinput input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <span className="register-component-text2">
+            <span>Email Id</span>
+          </span>
+          <input
+            type="email"
+            placeholder="Email Id"
+            autoComplete="email"
+            className="register-component-textinput1 input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <span className="register-component-text3"><span>Password</span></span>
+          <input
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+            className="register-component-textinput2 input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span className="register-component-text4">
+            <span>Confirm Password</span>
+          </span>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            autoComplete="new-password"
+            className="register-component-textinput3 input"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <div className="register-component-container4"></div>
+        <button type="button" className="register-component-button button" onClick={handleSubmit}>
+          <span>Register</span>
+        </button>
+        {error && <div className="error-message">{error}</div>}
+        <span className="register-component-text5">
+          <Link to="/login"><span>Already have an account ?</span></Link>
+        </span>
+      </div>
+      <ToastContainer />
+    </>
+  );
 }
 
-export default Register
+export default Register;
