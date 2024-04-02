@@ -2604,6 +2604,10 @@
       .doc{
         width: 185px;
       }
+      .header-logout button {
+        margin-left: 10px;
+        margin-top: 10px;
+      }
       
       
    

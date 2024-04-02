@@ -118,12 +118,27 @@ function House() {
       </div>
     </div>
   </div>
-
-
-
+  
   <div class="home-features">
+  <h1 className="home-text400">
+          <span>Status of cases</span>
+          <br></br>
+          <br></br>
+        </h1>
+        <div className="home-container14">
+          <div className="home-feature-card">
+            <h2 className="home-text44">Number of active cases</h2>
+            <h1 className="home-text45">08</h1>
+          </div>
+          <div className="home-container15">
+            <div className="home-feature-card1">
+              <h2 className="home-text46">Number of pending cases</h2>
+              <h1 className="home-text47">12</h1>
+            </div>
+          </div>
+        </div>
           <h1 class="home-text40">
-            <span class="home-text41">Document Categories</span>
+            <span class="home-text41">Recent Documents</span>
             <br />
           </h1>
   <div class="home-container14">

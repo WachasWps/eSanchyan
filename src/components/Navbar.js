@@ -55,11 +55,14 @@ function Navbar() {
             <Link to="/about" class="navigation-links1-navlink4">
               <span>About</span>
             </Link>
+            <Link to="/notification" class="navigation-links1-navlink4">
+              <span>Notification</span>
+            </Link>
           </nav>
         </div>
         {user ? (
           <div class="header-user-info">
-            <span>{user.displayName}</span>
+            <span>{user.name}</span>
             <span>{user.email}</span>
             <button onClick={handleLogout} class="header-logout button">
               Logout

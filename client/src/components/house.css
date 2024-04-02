@@ -1542,9 +1542,10 @@
         max-width: var(--dl-size-size-maxwidth);
         flex-direction: column;
       }
-      .home-text40 {
-        font-size: 3rem;
-        margin-bottom: var(--dl-space-space-threeunits);
+      .home-text400 {
+        font-size: 5rem;
+        align-self: center;
+        
       }
       .home-container14 {
         flex: 0 0 auto;
@@ -1609,9 +1610,6 @@
         }
         .home-text01 {
           text-align: center;
-        }
-        .home-text40 {
-          align-self: center;
         }
         .home-text41 {
           align-self: center;

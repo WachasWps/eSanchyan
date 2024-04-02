@@ -12,6 +12,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [registrationType, setRegistrationType] = useState('client'); // Default to 'client'
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ function Register() {
       await addDoc(collection(db, "users"), {
         name: name,
         email: email,
+        registrationType: registrationType // Save registration type in Firestore
       });
   
       // Clear error state
@@ -65,6 +67,13 @@ function Register() {
         <span className="register-component-text"><span>REGISTER</span></span>
         <div className="register-component-container1"></div>
         <div className="register-component-container2"></div>
+        <span className="register-component-text5">
+            <span>Register as:</span>
+            <select value={registrationType} onChange={(e) => setRegistrationType(e.target.value)}>
+              <option value="client">Client</option>
+              <option value="lawyer">Lawyer</option>
+            </select>
+          </span>
         <div className="register-component-container3">
           <span className="register-component-text1"><span>Name</span></span>
           <input
@@ -106,6 +115,7 @@ function Register() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          
         </div>
         <div className="register-component-container4"></div>
         <button type="button" className="register-component-button button" onClick={handleSubmit}>
