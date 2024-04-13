@@ -194,7 +194,6 @@ export default FileUpload;
 //         {/* choose file */}
 //         <button type="submit" disabled={!file} className="upload">
 //           Upload file
-//         </button>
 //       </form>
 //     </div>
 //   );

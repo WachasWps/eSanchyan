@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Popup from './Popup'; // Import the Popup component
+//import Uploaddoc from './Uploaddoc'; // Import the Uploaddoc component
 import './caseup.css';
 
 const CaseManagement = (props) => {
   const [showPopup, setShowPopup] = useState(false);
+  //const [showUploaddoc, setShowUploaddoc] = useState(false); // Define showUploaddoc state
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
+
+  //const toggleUploaddoc = () => {
+    //console.log('toggleUploaddoc function called');
+    //setShowUploaddoc(!showUploaddoc);
+    //console.log('showUploaddoc state:', showUploaddoc);
+ //};
 
   return (
     <div className="case-management-container">
@@ -137,7 +146,7 @@ const CaseManagement = (props) => {
             <button type="button" className="case-management-button03 button">
               View 
             </button>
-            <button type="button" className="case-management-button04 button">
+            <button type="button" className="case-management-button04 button" >
               Upload
             </button>
           </div>
@@ -145,7 +154,7 @@ const CaseManagement = (props) => {
             <button type="button" className="case-management-button05 button">
               View 
             </button>
-            <button type="button" className="case-management-button06 button">
+            <button type="button" className="case-management-button06 button" >
               Upload
             </button>
           </div>
@@ -153,7 +162,7 @@ const CaseManagement = (props) => {
             <button type="button" className="case-management-button07 button">
               View 
             </button>
-            <button type="button" className="case-management-button08 button">
+            <button type="button" className="case-management-button08 button" >
               Upload
             </button>
           </div>
@@ -185,7 +194,7 @@ const CaseManagement = (props) => {
             <button type="button" className="case-management-button15 button">
               View 
             </button>
-            <button type="button" className="case-management-button16 button">
+            <button type="button"  className="case-management-button16 button">
               Upload
             </button>
           </div>

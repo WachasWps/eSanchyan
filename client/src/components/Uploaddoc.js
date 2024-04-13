@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FileUpload from './FileUpload'
+import Uploaddoc from './Uploaddoc'
 import { useState, useEffect } from "react";
 import { ethers } from "ethers"
 import Upload from "../artifacts/contracts/Upload.sol/Upload.json";
@@ -47,11 +47,11 @@ function Uploaddoc() {
     }, []);
   return (
     <>
-    <FileUpload
+    <Uploaddoc
     account={account}
     provider={provider}
     contract={contract}
-  ></FileUpload> 
+  ></Uploaddoc> 
   <div
   class="document-uploadcard-container document-uploadcard-root-class-name"
 >
